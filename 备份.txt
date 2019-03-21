@@ -1,0 +1,21 @@
+void mouseTurnright(void)
+{
+    while (__GmLeft.cState  != __MOTORSTOP);
+    while (__GmRight.cState != __MOTORSTOP);
+    /*
+     *  开始右转
+     */
+    __GucMouseState   = __TURNRIGHT;
+    __GmRight.cDir    = __MOTORGOBACK;
+    __GmRight.uiPulse = 41;
+    
+    __GmLeft.cDir     = __MOTORGOAHEAD;
+    __GmLeft.uiPulse  = 41;
+    __GmRight.cState  = __MOTORRUN;
+    __GmLeft.cState   = __MOTORRUN;
+    GucMouseDir     = (GucMouseDir + 1) % 4;                            /*  方向标记                    */
+    while (__GmLeft.cState  != __MOTORSTOP);
+    while (__GmRight.cState != __MOTORSTOP);
+    __mazeInfDebug();
+    __delay(100000);
+}
